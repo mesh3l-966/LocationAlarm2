@@ -19,13 +19,10 @@ public class AddAlarm extends AppCompatActivity {
         setContentView(R.layout.activity_add_alarm);
 
 
-        final EditText name = (EditText)findViewById(R.id.namein);
+        EditText name = (EditText)findViewById(R.id.namein);
         EditText note = (EditText)findViewById(R.id.notein);
         final Button vmap = (Button)findViewById(R.id.map);
         TextView loc = (TextView) findViewById(R.id.address);
-
-
-
         final String sname = name.getText().toString();
         final String snote = note.getText().toString();
         final String sloc = loc.getText().toString();
@@ -44,32 +41,17 @@ public class AddAlarm extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+/*
                   String stmt="INSERT INTO alarmloc VALUES (1)";
-                  dbhelper db =new dbhelper(v.getContext());
-                 SQLiteDatabase sql = db.getWritableDatabase();
-                 sql.execSQL(stmt);
-
-
-                String stmt1="select alarm_id from alarmloc";
-                //dbhelper db1 =new dbhelper(v.getContext());
-                //SQLiteDatabase sql1 = db1.getWritableDatabase();
-                Cursor c =sql.rawQuery(stmt1,null);
-                c.moveToFirst();
-
-                name.setText(c.getInt(0)+"");
-
-
-
-
-
+                  dbhelper db1 =new dbhelper(v.getContext());
+                 SQLiteDatabase sql2 = db1.getWritableDatabase();
+                 sql2.execSQL(stmt);*/
 
 
             }
         });
 
         // Hello Ali, This is after transformation
-        //heloow messhal this is ali
         
     }
 }
