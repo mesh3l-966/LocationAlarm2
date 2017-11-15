@@ -12,7 +12,13 @@ public class dbhelper extends SQLiteOpenHelper{
 
     final static private  String dbname ="db1.db";
     final static private  int dbv=1;
-    final static private   String stmt ="CREATE TABLE alarmloc (alarm_id integer)";
+    final static private   String stmt ="" +
+            "CREATE TABLE alarmloc (" +
+            "alarm_id integer," +
+            "loc_id integer," +
+            "loc_name text," +
+            "note text" +
+            ")";
 
     public dbhelper(Context context) {
         super(context, dbname, null, dbv);
