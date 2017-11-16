@@ -45,10 +45,13 @@ public class AddAlarm extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                  String stmt="INSERT INTO alarmloc (alarm_id) VALUES('"+1+"')";
-                  dbhelper db =new dbhelper(v.getContext());
-                 SQLiteDatabase sql = db.getWritableDatabase();
-                 sql.execSQL(stmt);
+                   dbhelper db =new dbhelper(v.getContext());
+                  SQLiteDatabase sql = db.getWritableDatabase();
+
+               //db.deleteRow(2);
+
+                db.insertRow(3,7,"jk","ddjjjjj");
+                db.getAllrec();
 
 
                 String stmt1="select alarm_id from alarmloc";
@@ -56,7 +59,7 @@ public class AddAlarm extends AppCompatActivity {
                 Cursor c =sql.rawQuery(stmt1,null);
                 c.moveToFirst();
 
-                name.setText(c.getInt(0)+"");
+                //name.setText(c.getInt(2)+"");
 
 
 
