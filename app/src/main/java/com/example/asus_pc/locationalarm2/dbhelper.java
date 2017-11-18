@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -16,6 +17,7 @@ public class dbhelper extends SQLiteOpenHelper{
     private static final String TABLE_NAME = "alarmloc" ;
       private static final  String dbname ="db1.db";
       private static final int dbv=3;
+    private static   Context context1 =null;
       private static final  String stmt =
 
             "CREATE  TABLE "+TABLE_NAME+" (" +
@@ -26,7 +28,9 @@ public class dbhelper extends SQLiteOpenHelper{
             ")";
 
     public dbhelper(Context context) {
-        super(context, dbname, null, dbv);
+        super(context, dbname, null, dbv)        ;
+             final Context context1 =context;
+
     }
 
     @Override
@@ -45,6 +49,10 @@ public class dbhelper extends SQLiteOpenHelper{
 
     public void insertRow(Integer calarm_id,Integer cloc_id,String cloc_name,String cnote) {
        SQLiteDatabase database = this.getWritableDatabase();
+
+
+        Toast.makeText(context1,"("+calarm_id+"--"+cloc_id+"--"+cloc_name+"--"+cnote+")",Toast.LENGTH_LONG).show();
+
         ContentValues values = new ContentValues();
         values.put("alarm_id",  calarm_id);
         values.put("loc_id",  cloc_id);

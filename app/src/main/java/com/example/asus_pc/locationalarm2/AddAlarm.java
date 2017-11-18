@@ -50,6 +50,7 @@ public class AddAlarm extends AppCompatActivity {
 
                //db.deleteRow(2);
 
+
                 db.insertRow(3,7,"jk","ddjjjjj");
                 db.getAllrec();
 
