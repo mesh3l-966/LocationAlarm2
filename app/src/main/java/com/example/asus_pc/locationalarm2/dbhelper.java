@@ -82,7 +82,7 @@ public class dbhelper extends SQLiteOpenHelper{
         c.moveToFirst();
 
         while(! c.isAfterLast()){
-            ar.add(c.getInt(0)+"--"+c.getInt(1)+"--"+c.getString(2)+"--"+c.getString(3));
+            ar.add(c.getInt(0)+"--"+c.getString(1)+"--"+c.getString(2)+"--"+c.getString(3));
             c.moveToNext();
         }
         return  ar;
