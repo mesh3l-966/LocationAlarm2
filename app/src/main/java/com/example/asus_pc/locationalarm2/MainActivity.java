@@ -36,7 +36,7 @@ public class MainActivity extends ListActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+//
                 EditText tv = (EditText) findViewById(R.id.editText) ;
                 try {
                     dbhelper db =new dbhelper(getApplicationContext());
