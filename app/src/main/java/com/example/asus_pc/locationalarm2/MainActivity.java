@@ -10,6 +10,7 @@ import android.view.View;
 import android.support.design.widget.FloatingActionButton;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -33,7 +34,7 @@ public class MainActivity extends ListActivity {
             @Override
             public void onClick(View view) {
 
-                TextView tv = (TextView) findViewById(R.id.textView) ;
+                EditText tv = (EditText) findViewById(R.id.editText) ;
 
                 dbhelper db =new dbhelper(getApplicationContext());
                 SQLiteDatabase sql = db.getWritableDatabase();
