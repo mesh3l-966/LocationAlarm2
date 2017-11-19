@@ -48,17 +48,17 @@ public class AddAlarm extends AppCompatActivity {
                    dbhelper db =new dbhelper(v.getContext());
                   SQLiteDatabase sql = db.getWritableDatabase();
 
-               //db.deleteRow(2);
+              // db.deleteRow(3);
 
 
                 db.insertRow(3,7,"jk","ddjjjjj");
                 db.getAllrec();
 
 
-                String stmt1="select alarm_id from alarmloc";
+               // String stmt1="select alarm_id from alarmloc";
 
-                Cursor c =sql.rawQuery(stmt1,null);
-                c.moveToFirst();
+                //Cursor c =sql.rawQuery(stmt1,null);
+              //  c.moveToFirst();
 
                 //name.setText(c.getInt(2)+"");
 

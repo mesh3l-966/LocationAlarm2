@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public class dbhelper extends SQLiteOpenHelper{
     private static   Context context1 =null;
       private static final  String stmt =
 
-            "CREATE  TABLE "+TABLE_NAME+" (" +
+            "CREATE  TABLE " +TABLE_NAME+ " (" +
             "alarm_id integer," +
             "loc_id integer," +
             "loc_name text," +
@@ -50,15 +51,16 @@ public class dbhelper extends SQLiteOpenHelper{
     public void insertRow(Integer calarm_id,Integer cloc_id,String cloc_name,String cnote) {
        SQLiteDatabase database = this.getWritableDatabase();
 
-
-        Toast.makeText(context1,"("+calarm_id+"--"+cloc_id+"--"+cloc_name+"--"+cnote+")",Toast.LENGTH_LONG).show();
+        Log.d("myTag", "("+calarm_id+"--"+cloc_id+"--"+cloc_name+"--"+cnote+")");
 
         ContentValues values = new ContentValues();
         values.put("alarm_id",  calarm_id);
         values.put("loc_id",  cloc_id);
-        values.put("loc_name",  cloc_name);
+        values.put("loc_name", cloc_name);
         values.put("note",  cnote);
         database.insert("alarmloc", null, values);
+
+
        // database.close();*/
 
        // String stmt ="insert into alarmloc   values ("+calarm_id+","+cloc_id+",'"+cloc_name+"','"+cnote+"')";
@@ -80,7 +82,7 @@ public class dbhelper extends SQLiteOpenHelper{
         c.moveToFirst();
 
         while(! c.isAfterLast()){
-            ar.add(c.getInt(0)+"--"+c.getInt(1)+"--"+c.getInt(2)+"--"+c.getInt(3));
+            ar.add(c.getInt(0)+"--"+c.getInt(1)+"--"+c.getString(2)+"--"+c.getString(3));
             c.moveToNext();
         }
         return  ar;
