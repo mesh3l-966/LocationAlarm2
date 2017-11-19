@@ -69,6 +69,9 @@ public class AddAlarm extends AppCompatActivity implements dialogMap.ifaceTest {
                db.insertRow( (c.getInt(0)+1),loc.getText().toString(),name.getText().toString(),note.getText().toString());
                db.getAllrec();
 
+               Intent nt = new Intent(AddAlarm.this,MainActivity.class);
+               startActivity(nt);
+
 
 
 
