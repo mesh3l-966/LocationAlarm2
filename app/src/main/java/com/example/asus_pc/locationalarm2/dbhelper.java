@@ -17,13 +17,13 @@ import java.util.ArrayList;
 public class dbhelper extends SQLiteOpenHelper{
     private static final String TABLE_NAME = "alarmloc" ;
       private static final  String dbname ="db1.db";
-      private static final int dbv=3;
+      private static final int dbv=4;
     private static   Context context1 =null;
       private static final  String stmt =
 
             "CREATE  TABLE " +TABLE_NAME+ " (" +
             "alarm_id integer," +
-            "loc_id integer," +
+            "loc_id text," +
             "loc_name text," +
             "note text" +
             ")";
@@ -48,10 +48,10 @@ public class dbhelper extends SQLiteOpenHelper{
     }
 
 
-    public void insertRow(Integer calarm_id,Integer cloc_id,String cloc_name,String cnote) {
+    public void insertRow(Integer calarm_id,String cloc_id,String cloc_name,String cnote) {
        SQLiteDatabase database = this.getWritableDatabase();
 
-        Log.d("myTag", "("+calarm_id+"--"+cloc_id+"--"+cloc_name+"--"+cnote+")");
+       // Log.d("myTag", "("+calarm_id+"--"+cloc_id+"--"+cloc_name+"--"+cnote+")");
 
         ContentValues values = new ContentValues();
         values.put("alarm_id",  calarm_id);
