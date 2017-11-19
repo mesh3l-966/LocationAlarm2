@@ -8,10 +8,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.support.design.widget.FloatingActionButton;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -23,6 +25,7 @@ public class MainActivity extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         dbhelper db =new dbhelper(getApplicationContext());
         ArrayList <String> ar=db.getAllrec();
@@ -35,11 +38,18 @@ public class MainActivity extends ListActivity {
             public void onClick(View view) {
 
                 EditText tv = (EditText) findViewById(R.id.editText) ;
+                try {
+                    dbhelper db =new dbhelper(getApplicationContext());
+                    SQLiteDatabase sql = db.getWritableDatabase();
+                    db.deleteRow(Integer.parseInt(tv.getText().toString()));
+                    db.getAllrec();
+                    Intent intent = getIntent();
+                    finish();
+                    startActivity(intent);
+                }catch (Exception e){
+                    Toast.makeText(view.getContext(),"you must insert number",Toast.LENGTH_LONG).show();
+                }
 
-                dbhelper db =new dbhelper(getApplicationContext());
-                SQLiteDatabase sql = db.getWritableDatabase();
-                db.deleteRow(Integer.parseInt(tv.getText().toString()));
-                db.getAllrec();
             }
         });
 
