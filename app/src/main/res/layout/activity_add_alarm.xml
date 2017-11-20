@@ -11,8 +11,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="32dp"
-        android:text="Alarm Name"
+        android:text="@string/alarm_name"
         android:textAppearance="@style/TextAppearance.AppCompat.Button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -22,9 +23,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="20dp"
         android:ems="10"
-        android:hint="Name"
+        android:hint="@string/name"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/alarmname" />
@@ -34,8 +36,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="40dp"
-        android:text="Note"
+        android:text="@string/note"
         android:textAppearance="@style/TextAppearance.AppCompat.Button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/namein" />
@@ -45,8 +48,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="40dp"
-        android:text="Choose Location"
+        android:text="@string/choose_location"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/notein" />
 
@@ -55,15 +59,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="123456"
+        android:text="@string/_123456"
         app:layout_constraintTop_toBottomOf="@+id/map"
-        tools:layout_editor_absoluteX="32dp" />
+        tools:layout_editor_absoluteX="32dp"
+        tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/notein"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="20dp"
         android:ems="10"
         android:inputType="textMultiLine"
@@ -75,8 +81,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="68dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="60dp"
-        android:text="save"
+        android:text="@string/save"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/address" />
 
