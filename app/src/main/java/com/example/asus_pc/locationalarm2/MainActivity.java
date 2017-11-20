@@ -25,6 +25,8 @@ public class MainActivity extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // this code fix the layout when keyboard appear
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         dbhelper db =new dbhelper(getApplicationContext());
@@ -36,16 +38,21 @@ public class MainActivity extends ListActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//
+
                 EditText tv = (EditText) findViewById(R.id.editText) ;
+
+                // add try catch Exception to make sure that the Edit text has a value
                 try {
                     dbhelper db =new dbhelper(getApplicationContext());
                     SQLiteDatabase sql = db.getWritableDatabase();
                     db.deleteRow(Integer.parseInt(tv.getText().toString()));
                     db.getAllrec();
+
+                    // when click on delete button, refresh the activity
                     Intent intent = getIntent();
                     finish();
                     startActivity(intent);
+
                 }catch (Exception e){
                     Toast.makeText(view.getContext(),"you must insert number",Toast.LENGTH_LONG).show();
                 }
