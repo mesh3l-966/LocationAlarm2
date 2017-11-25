@@ -36,11 +36,13 @@ public class AddAlarm extends AppCompatActivity implements dialogMap.ifaceTest {
         vmap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentManager fm =  getSupportFragmentManager();
-                dialogMap d1 = new dialogMap();
+              //  FragmentManager fm =  getSupportFragmentManager();
+                // dialogMap d1 = new dialogMap();
+                //d1.show(fm,"d");
 
+                Intent nt2 = new Intent(AddAlarm.this,MapsActivity.class);
+                startActivity(nt2);
 
-                d1.show(fm,"d");
 
             }
         });
