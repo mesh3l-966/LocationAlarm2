@@ -2,30 +2,37 @@ package com.example.asus_pc.locationalarm2;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.location.Geocoder;
 import android.location.Location;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.widget.Toast;
-
+import android.os.Bundle;
+import java.lang.String;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.GoogleMap.OnMyLocationButtonClickListener;
 import com.google.android.gms.maps.GoogleMap.OnMyLocationClickListener;
+import com.google.android.gms.maps.GoogleMap.OnMapClickListener;
+import com.google.android.gms.maps.GoogleMap.OnMapLongClickListener;
+import android.content.Intent;
 
 
 public class MapsActivity extends FragmentActivity implements OnMyLocationButtonClickListener,
         OnMyLocationClickListener,
-        OnMapReadyCallback {
+        OnMapReadyCallback, OnMapLongClickListener {
 
     private GoogleMap mMap;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +70,8 @@ public class MapsActivity extends FragmentActivity implements OnMyLocationButton
             mMap.setMyLocationEnabled(true);
             mMap.setOnMyLocationButtonClickListener(this);
             mMap.setOnMyLocationClickListener(this);
+            mMap.setOnMapLongClickListener(this);
+
 
         } else {
             // Show rationale and request permission.
@@ -71,6 +80,25 @@ public class MapsActivity extends FragmentActivity implements OnMyLocationButton
         }
 
 
+
+
+    }
+
+    @Override
+    public void onMapLongClick(LatLng point) {
+       // Toast.makeText(this, "long pressed, point= " + point.toString(), Toast.LENGTH_LONG).show();
+
+
+
+        Intent i = new Intent(MapsActivity.this, AddAlarm.class);
+        String location = point.toString();
+        Bundle extras = getIntent().getExtras();
+        String name = extras.getString("name");
+        String note = extras.getString("note");
+        i.putExtra("STRING_I_NEED", location);
+        i.putExtra("name", name.toString());
+        i.putExtra("note", note.toString());
+        startActivity(i);
 
     }
 
@@ -86,6 +114,8 @@ public class MapsActivity extends FragmentActivity implements OnMyLocationButton
         // (the camera animates to the user's current position).
         return false;
     }
+
+
 
 
 }
