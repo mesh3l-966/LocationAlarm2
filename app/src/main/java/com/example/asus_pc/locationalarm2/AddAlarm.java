@@ -92,7 +92,7 @@ public class AddAlarm extends AppCompatActivity {
                // db.deleteRow(2);
                // db.deleteRow(3);
                // db.deleteRow(4);
-              //  db.deleteRow(5);
+              ///  db.deleteRow(5);
 
 
 
