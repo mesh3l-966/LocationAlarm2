@@ -71,6 +71,7 @@ public class AddAlarm extends AppCompatActivity {
                 Intent nt2 = new Intent(AddAlarm.this,MapsActivity.class);
                 nt2.putExtra("name", name.getText().toString());
                 nt2.putExtra("note", note.getText().toString());
+                nt2.putExtra("theType", "add");
                 startActivity(nt2);
 
 

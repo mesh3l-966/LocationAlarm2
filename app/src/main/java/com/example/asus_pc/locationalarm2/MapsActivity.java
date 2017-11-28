@@ -89,16 +89,23 @@ public class MapsActivity extends FragmentActivity implements OnMyLocationButton
        // Toast.makeText(this, "long pressed, point= " + point.toString(), Toast.LENGTH_LONG).show();
 
 
-
-        Intent i = new Intent(MapsActivity.this, AddAlarm.class);
+        Intent i;
         String location = point.toString();
+
         Bundle extras = getIntent().getExtras();
         String name = extras.getString("name");
         String note = extras.getString("note");
+        String theType = extras.getString("theType");
+if(theType.equals("edit"))
+             i = new Intent(MapsActivity.this, EditAlarm.class);
+else
+    i = new Intent(MapsActivity.this, AddAlarm.class);
         i.putExtra("STRING_I_NEED", location);
         i.putExtra("name", name.toString());
         i.putExtra("note", note.toString());
-        startActivity(i);
+       // Toast.makeText(this, location, Toast.LENGTH_SHORT).show();
+
+         startActivity(i);
 
     }
 

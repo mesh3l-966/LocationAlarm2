@@ -34,6 +34,15 @@ public class dbhelper extends SQLiteOpenHelper{
 
     }
 
+    public void updateRow(Integer id, String loc_id, String loc_name, String note) {
+
+        String stmt ="update alarmloc set loc_id = '" + loc_id +  "', loc_name = '" + loc_name + "', note = '" + note + "' where alarm_id = " + id.toString();
+
+        SQLiteDatabase sql = this.getWritableDatabase();
+        sql.execSQL(stmt);
+
+    }
+
     @Override
     public void onCreate(SQLiteDatabase db) {
 
@@ -100,8 +109,15 @@ public class dbhelper extends SQLiteOpenHelper{
         SQLiteDatabase sql = this.getWritableDatabase();
         sql.execSQL(stmt);
 
+    }
 
+    // method to delete all rows
+    public void deleteAllRows() {
 
+        String stmt2 ="delete from alarmloc";
+
+        SQLiteDatabase sql = this.getWritableDatabase();
+        sql.execSQL(stmt2);
 
     }
 
