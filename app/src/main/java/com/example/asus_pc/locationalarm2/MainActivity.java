@@ -1,11 +1,24 @@
 package com.example.asus_pc.locationalarm2;
 
+import android.Manifest;
 import android.app.ListActivity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.media.ToneGenerator;
+import android.net.Uri;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.FloatingActionButton;
 import android.view.WindowManager;
@@ -16,10 +29,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView;
+
+import com.google.android.gms.maps.model.LatLng;
+
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 public class MainActivity extends ListActivity {
-
 
 
     @Override
@@ -30,13 +47,84 @@ public class MainActivity extends ListActivity {
         // this code fix the layout when keyboard appear
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
-        dbhelper db =new dbhelper(getApplicationContext());
-        ArrayList <String> ar=db.getAllrec();
-        setListAdapter(new ArrayAdapter< String >(this,android.R.layout.simple_list_item_1,ar));
+        dbhelper db = new dbhelper(getApplicationContext());
+       final ArrayList<String> ar = db.getAllrec();
+
+        setListAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, ar));
 
 
+        LocationManager lm = (LocationManager) getBaseContext().getSystemService(LOCATION_SERVICE);
+        LocationListener ls = new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+                // Log.d("my_log", ar.toString());
+                if(ar.size() > 0) {
+                    TextView textView4 = (TextView) findViewById(R.id.textView4);
+                    LatLng ll = new LatLng(24.864, 46.796);
+                    float[] results = new float[10];
+                    ArrayList<String> ar2 = new ArrayList<>();
+
+                    for(int i=0; i < ar.size(); i++) {
+                        String str = ar.get(i);
+
+                        str = str.substring(str.indexOf('(') + 1, str.indexOf(')'));
+                        double alt = Double.parseDouble(str.split(",")[0]);
+                        double longitude = Double.parseDouble(str.split(",")[1]);
+
+                        // 10--lat/lng: (25.567559126828513,45.22895269095898)--aa--bb
+
+                        //
+                        Location.distanceBetween(location.getAltitude(), location.getLongitude(), alt, longitude, results);
+
+                        ar2.add(" " + results[1]);
 
 
+                    }
+                    Collections.sort(ar2);
+                    /*
+                    final MediaPlayer mp = MediaPlayer.create(MainActivity.this, R.raw.sound);
+
+                    if(Double.parseDouble(ar2.get(0)) < 1000)
+                    {
+                        mp.start();
+
+                    } else {
+                        mp.pause();
+                    }
+                    */
+                    textView4.setText(" " + (Float.parseFloat(ar2.get(0))));
+                    //Log.d("aaa", ar2.toString());
+
+                }
+            }
+
+            @Override
+            public void onStatusChanged(String provider, int status, Bundle extras) {
+
+            }
+
+            @Override
+            public void onProviderEnabled(String provider) {
+
+            }
+
+            @Override
+            public void onProviderDisabled(String provider) {
+
+            }
+        };
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, ls);
 
         Button btn= (Button) findViewById(R.id.delBtn) ;
         btn.setOnClickListener(new View.OnClickListener() {
