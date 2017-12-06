@@ -15,6 +15,20 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+
+/*
+
+
+YOUR API KEY for the map
+
+AIzaSyCR07q90D-TIEGE_nti3PEYhtp0gUzRalA
+
+using : team4prjct email
+
+
+
+ */
+
 public class dialogMap extends DialogFragment {
     public static interface ifaceTest {
         public abstract void select_loc (String x);

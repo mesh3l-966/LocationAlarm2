@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">LocationAlarm2</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="alarm_name">Alarm Name</string>
+    <string name="name">Name</string>
+    <string name="note">Note</string>
+    <string name="choose_location">Choose Location</string>
+    <string name="_123456">123456</string>
+    <string name="save">save</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="update">Update</string>
 </resources>

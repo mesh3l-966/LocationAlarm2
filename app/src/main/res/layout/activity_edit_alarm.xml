@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.asus_pc.locationalarm2.AddAlarm">
-
+    tools:context="com.example.asus_pc.locationalarm2.EditAlarm">
     <TextView
         android:id="@+id/alarmname"
         android:layout_width="wrap_content"
@@ -67,14 +66,14 @@
         app:layout_constraintTop_toBottomOf="@+id/note" />
 
     <Button
-        android:id="@+id/save"
+        android:id="@+id/update"
         android:layout_width="93dp"
         android:layout_height="43dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="@string/save"
+        android:text="@string/update"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
