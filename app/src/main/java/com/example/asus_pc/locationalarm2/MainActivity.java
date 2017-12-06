@@ -75,7 +75,7 @@ public class MainActivity extends ListActivity {
 
                         //
                         Location.distanceBetween(location.getAltitude(), location.getLongitude(), alt, longitude, results);
-
+//
                         ar2.add(" " + results[1]);
 
 
