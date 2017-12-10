@@ -74,9 +74,9 @@ public class MainActivity extends ListActivity {
                         // 10--lat/lng: (25.567559126828513,45.22895269095898)--aa--bb
 
                         //
-                        Location.distanceBetween(location.getAltitude(), location.getLongitude(), alt, longitude, results);
+                        Location.distanceBetween(location.getLatitude(), location.getLongitude(), alt, longitude, results);
 //
-                        ar2.add(" " + results[1]);
+                        ar2.add(" " + results[0]);
 
 
                     }
