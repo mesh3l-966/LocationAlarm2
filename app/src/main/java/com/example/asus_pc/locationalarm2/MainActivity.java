@@ -29,6 +29,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView;
+import android.widget.ToggleButton;
 
 import com.google.android.gms.maps.model.LatLng;
 
@@ -43,6 +44,9 @@ public class MainActivity extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        final  MediaPlayer mp = MediaPlayer.create(MainActivity.this, R.raw.sound);
+
+        final ToggleButton tb = (ToggleButton) findViewById(R.id.toggleButton);
 
         // this code fix the layout when keyboard appear
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
@@ -76,22 +80,25 @@ public class MainActivity extends ListActivity {
                         //
                         Location.distanceBetween(location.getLatitude(), location.getLongitude(), alt, longitude, results);
 //
-                        ar2.add(" " + results[0]);
+
+
+                        ar2.add("" + results[0]);
 
 
                     }
                     Collections.sort(ar2);
-                    /*
-                    final MediaPlayer mp = MediaPlayer.create(MainActivity.this, R.raw.sound);
 
-                    if(Double.parseDouble(ar2.get(0)) < 1000)
+
+                    if((Float.parseFloat(ar2.get(0)) <=10.0)  && (tb.isChecked()))
                     {
                         mp.start();
 
-                    } else {
+                    }
+                    if((Float.parseFloat(ar2.get(0)) <=10.0) && (!tb.isChecked()))
+                    {
                         mp.pause();
                     }
-                    */
+
                     textView4.setText(" " + (Float.parseFloat(ar2.get(0))));
                     //Log.d("aaa", ar2.toString());
 
