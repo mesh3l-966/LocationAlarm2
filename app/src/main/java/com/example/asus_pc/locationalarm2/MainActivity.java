@@ -36,6 +36,7 @@ import com.google.android.gms.maps.model.LatLng;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 
 public class MainActivity extends ListActivity {
 
@@ -44,7 +45,7 @@ public class MainActivity extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        final  MediaPlayer mp = MediaPlayer.create(MainActivity.this, R.raw.sound);
+        final MediaPlayer mp =  MediaPlayer.create(MainActivity.this, R.raw.sound);;
 
         final ToggleButton tb = (ToggleButton) findViewById(R.id.toggleButton);
 
@@ -52,56 +53,42 @@ public class MainActivity extends ListActivity {
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         dbhelper db = new dbhelper(getApplicationContext());
-       final ArrayList<String> ar = db.getAllrec();
+        final ArrayList<String> ar = db.getAllrec();
 
         setListAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, ar));
-
 
         LocationManager lm = (LocationManager) getBaseContext().getSystemService(LOCATION_SERVICE);
         LocationListener ls = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
-                // Log.d("my_log", ar.toString());
                 if(ar.size() > 0) {
                     TextView textView4 = (TextView) findViewById(R.id.textView4);
-                    LatLng ll = new LatLng(24.864, 46.796);
                     float[] results = new float[10];
-                    ArrayList<String> ar2 = new ArrayList<>();
-
+                    ArrayList<Float> ar2 = new ArrayList<>();
+                    HashMap<Float, String> hm = new HashMap<>();
                     for(int i=0; i < ar.size(); i++) {
                         String str = ar.get(i);
-
                         str = str.substring(str.indexOf('(') + 1, str.indexOf(')'));
                         double alt = Double.parseDouble(str.split(",")[0]);
                         double longitude = Double.parseDouble(str.split(",")[1]);
-
-                        // 10--lat/lng: (25.567559126828513,45.22895269095898)--aa--bb
-
-                        //
                         Location.distanceBetween(location.getLatitude(), location.getLongitude(), alt, longitude, results);
-//
-
-
-                        ar2.add("" + results[0]);
-
-
+                        ar2.add(results[0]);
+                        hm.put(results[0], ar.get(i));
                     }
+
+                    // sort array to get the nearest location
                     Collections.sort(ar2);
+                    String nameOfNearest = hm.get(ar2.get(0)).split("--")[2];
 
-
-                    if((Float.parseFloat(ar2.get(0)) <=10.0)  && (tb.isChecked()))
+                    if((ar2.get(0) <= 100.0)  && (tb.isChecked()))
                     {
                         mp.start();
-
                     }
-                    if((Float.parseFloat(ar2.get(0)) <=10.0) && (!tb.isChecked()))
+                    if(((ar2.get(0) <= 100.0) && (!tb.isChecked())))
                     {
                         mp.pause();
                     }
-
-                    textView4.setText(" " + (Float.parseFloat(ar2.get(0))));
-                    //Log.d("aaa", ar2.toString());
-
+                    textView4.setText(nameOfNearest + " " + (ar2.get(0) + " m "));
                 }
             }
 
@@ -155,24 +142,18 @@ public class MainActivity extends ListActivity {
                 }catch (Exception e){
                     Toast.makeText(view.getContext(),"you must insert number",Toast.LENGTH_LONG).show();
                 }
-
             }
         });
 
-
-
         FloatingActionButton add = (FloatingActionButton)findViewById(R.id.addfloat);
-       add.setOnClickListener(new View.OnClickListener() {
+        add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new  Intent(MainActivity.this,AddAlarm.class);
+                intent.putExtra("q", "q");
                 startActivity(intent);
-
-
             }
         });
-
-
     }
 
     public void deleteAllRows(View view){
@@ -191,17 +172,24 @@ public class MainActivity extends ListActivity {
     }
     }
 
-
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
 
+        try {
             String arr = l.getItemAtPosition(position).toString();
-       // Toast.makeText(v.getContext(), arr[0] + " " + arr[1] + " " + arr[2] + " " + arr[3],Toast.LENGTH_LONG).show();
+            // Toast.makeText(v.getContext(), arr[0] + " " + arr[1] + " " + arr[2] + " " + arr[3],Toast.LENGTH_LONG).show();
 
-        Intent i = new Intent(MainActivity.this, EditAlarm.class);
-        i.putExtra("info", arr);
+            Intent i = new Intent(MainActivity.this, EditAlarm.class);
+            i.putExtra("info", arr);
 
-        startActivity(i);
+            startActivity(i);
+        }
+
+        catch (Exception e)
+        {
+             Toast.makeText(v.getContext(), e.toString() ,Toast.LENGTH_LONG).show();
+
+        }
 
     }
 

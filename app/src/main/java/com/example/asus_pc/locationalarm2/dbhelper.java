@@ -68,19 +68,7 @@ public class dbhelper extends SQLiteOpenHelper{
         values.put("loc_name", cloc_name);
         values.put("note",  cnote);
         database.insert("alarmloc", null, values);
-
-
-       // database.close();*/
-
-       // String stmt ="insert into alarmloc   values ("+calarm_id+","+cloc_id+",'"+cloc_name+"','"+cnote+"')";
-
-       // SQLiteDatabase sql = this.getWritableDatabase();
-     //   sql.execSQL(stmt);
-
-
     }
-
-
 
     public ArrayList getAllrec( ) {
 
